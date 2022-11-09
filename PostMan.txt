@@ -1,0 +1,52 @@
+Postman: Representa un frontend rápdo.
+
+Ir a collection, apretar el signo + para crear una nueva coleccion.
+Colocarle el nombre de la carpeta principal/raíz
+Luego crear una subcarpeta con nombre de la app (en este caso heroe)
+Luego apretar en los tres puntos que figuran al lado de la subcarpeta creada y seleccionar la opción 
+add request para crear el requerimiento.
+
+Devolver la respuesta de la apiview creada en django:
+Ponerle nombre a la new request.
+eleccionar el metodo que utiliza la view.
+colocar la url === que devuelve el front de django rest.
+enviar.
+Ya tenemos nuestro primer servicio andando.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
