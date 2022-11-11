@@ -64,7 +64,9 @@ ROOT_URLCONF = 'heroesApp.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            BASE_DIR / 'hero/templates',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

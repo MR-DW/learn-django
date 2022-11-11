@@ -1,0 +1,15 @@
+{%extends 'Index.html' %}
+
+{% block content %}
+{% for h in heroes %}
+  <div class="card" style="background-color: brown;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h3>{{ h.name }}</h3>
+      <h3>{{ h.universe }}</h3>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
+      </p>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}

@@ -6,8 +6,10 @@ from rest_framework.views import APIView
 # REst import
 from rest_framework.response import Response
 from rest_framework import status
-
-
+# Import de Respuesta http front
+from django.http import HttpResponse
+# Render import para el template front
+from django.shortcuts import render
 # Models imports
 from heroe.models import Hero
 
@@ -18,41 +20,38 @@ from heroe.serializer import HeroSerializer
 from heroe.helpers.heroeErrors import hayHeroe
 
 # Create your views here.
+def Index(request):
+    
+   
+    return render(request, 'lista.html', {})
+
+def lista(request):
+    
+    heroes = Hero.objects.all()
+    return render(request, 'lista.html',{
+         'heroes':heroes,
+    })
+
+def crear(request):
+    return render(request, 'crear.html',{})
+
+def delete(request):
+    return render(request, 'delete.html',{})
 
 class HeroApiView(APIView):
 
     def get(self, request):
         """Retorna un listado con todos los heroes almacenados en la base"""
-        
-        # print(f'REQUEST --> {request}')
 
         heroes = Hero.objects.all()
-        # print(heroes.values())
-        
         heroes_serializer = HeroSerializer(heroes, many=True)
-        print(heroes.values())
-        print(heroes_serializer)
-        print(heroes_serializer.data)
-
-
-        # print(heroes.values())
-
-        # data = { 
-        #      'Heroes':'hola'
-        #  }
-
-        # return response(
-        #     data=data,
-        #     status=status.HTTP_200_OK
-        #     )
 
         return Response(
            data = heroes_serializer.data,
            status=status.HTTP_200_OK
         )
 
-
-
+    
     # def post(self, request):
         # """crea un nuevo registro/heroes"""
         # print('Primer post')
@@ -123,27 +122,16 @@ class HeroDetailApiView(APIView):
         """Nos devuelve mas info de un heroe en particular"""
 
         try:
-
-#         # print('Get')
-#         # print(f'PK --> {pk}')
-#        heroes = Hero.objects.filter()
             heroe = Hero.objects.get(id = pk)
-#         # print(f'Get del ORM -> {heroe}')
-
             heroe_serializer = HeroSerializer(heroe)
-#         # print(f'Get del ORM -> {heroe_serializer.data}')
-        
             return Response(
                 data = heroe_serializer.data,
                 status=status.HTTP_200_OK
             )
-
         except:    
-            
             data ={
                 'mensaje':'Heroe no encontrado'
             }
-
             return Response(
                 data = data,
                 status=status.HTTP_400_BAD_REQUEST
@@ -153,27 +141,18 @@ class HeroDetailApiView(APIView):
         """Modifica el registro"""
         
         respuesta = hayHeroe(pk)
-
-        # validacion, heroe = hayHeroe(pk)
-
         if hayHeroe(pk)[0]: 
-
-            # heroe = Hero.objects.get(id = pk)
-        
             heroe_serializer = HeroSerializer(hayHeroe(pk)[1], data = request.data)
-        
+
             if heroe_serializer.is_valid():
                 heroe_serializer.save() 
-            
                 data ={
                      'mensage':'El hereo fue modificado de forma correcta',
                 }
-            
                 return Response(
                     data=data,
                     status=status.HTTP_200_OK,
                 )   
-
 
         return Response(
             data = heroe_serializer.errors,
@@ -182,33 +161,12 @@ class HeroDetailApiView(APIView):
 
     def delete(self, request, pk):
         """Elimina un registro"""
-        
         heroe = Hero.objects.get(id = pk)
-        
         heroe.delete()
-        
         data ={
                 'mensage':'El hereo fue eliminado de forma correcta',
         }
-        
         return Response(
                 data=data,
                 status=status.HTTP_200_OK,
         )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
