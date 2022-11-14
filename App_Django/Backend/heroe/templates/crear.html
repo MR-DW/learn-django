@@ -1,0 +1,24 @@
+{%extends 'Index.html' %}
+
+
+
+{% block content %}
+<h1>Crear Nuevo Heroe</h1>
+<form name="altaDeHeroes" actions="registro" method="POST">
+<div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Nombre Nuevo Heroe</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Mi Heroe" name="name">
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlInput1" class="form-label">Edad Heroe</label>
+    <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Años" name="age">
+  </div>
+  <div class="mb-3">
+    <label for="exampleFormControlTextarea1" class="form-label">Universo Hereo</label>
+    <input type="radio" id="exampleFormControlTextarea1" rows="3" name="universe" value="1">Marvel</input>
+    <input type="radio" id="exampleFormControlTextarea1" rows="3" name="universe" value="2">DC</input>
+  </div>
+  <button type="button" id="button" class="btn btn-primary col-3">Crear</button>
+  
+</form>
+{% endblock%}
